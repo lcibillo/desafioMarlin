@@ -97,7 +97,7 @@ namespace DesafioMarlin.Controllers
             var aluno = _context.Aluno.Find(matricula.AlunoId);
 
             var matriculasEncontradas = from m in _context.Matricula
-                                        where m.AlunoId.Equals(aluno.idAluno)
+                                        where m.AlunoId.Equals(matricula.AlunoId)
                                         select m;
             var matriculasIguais = from m in matriculasEncontradas where m.TurmaId.Equals(matricula.TurmaId) select m;
 

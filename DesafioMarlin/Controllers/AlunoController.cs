@@ -124,6 +124,16 @@ namespace DesafioMarlin.Controllers
                 Response.StatusCode = 400;
                 return Content("Turma Não encontrada");
             }
+            var qtdAlunosTurma = 0;
+            var qtdMaximaAlunosTurma = 5;
+            foreach (var item in aluno.Matricula)
+            {
+                qtdAlunosTurma = _context.Matricula.Count(t => t.TurmaId == item.TurmaId);
+                if (qtdAlunosTurma > qtdMaximaAlunosTurma)
+                {
+                    return Content("Total máximo de alunos atigingido na turma " + item.TurmaId);
+                }
+            }
 
             _context.Aluno.Add(aluno);
             await _context.SaveChangesAsync();
